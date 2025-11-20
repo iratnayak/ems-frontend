@@ -1,15 +1,15 @@
-Employee Management System (EMS) — Full Stack Project
-------------------------------------------------------
+Employee Management System (Frontend + API)
+------------------------------------------
 
-A complete EMS web application built with React and Node.js. The system maintains employee
-salary details including OT calculations.
+Features
+- Add employee (Name, Basic, OT Hours, OT Rate)
+- Automatic salary calculation (Basic + OT)
+- List employees using live API
+- Delete employee with instant UI refresh
+- Backend: Node.js + Express + JSON file DB
+- Frontend: React hooks (useState, useEffect), Fetch API
 
-Features:
-- Add employees via UI
-- Automatic OT & full salary calculation
-- REST API (GET + POST)
-- JSON file database
-- React UI with table refresh
-
-Tech stack:
-React | Node.js | Express | JavaScript (ES6)
+Tech Stack
+Frontend: React + Vite
+Backend: Node.js + Express
+Database: JSON File Storage
