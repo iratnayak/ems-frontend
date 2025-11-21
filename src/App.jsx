@@ -10,6 +10,7 @@ function App() {
   const [otRate, setOtRate] = useState("");
   const [isEdit, setIsEdit] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
 
 // Load employees from API
   const loadData = () => {
@@ -108,7 +109,7 @@ function App() {
     setOtRate("");
   };
 
-  // Delete Employee
+  // Delete Employee Details
   const deleteEmployee = (index) => {
     fetch(`http://localhost:5001/employees/${index}`,{
       method: "DELETE", 
@@ -119,19 +120,34 @@ function App() {
 
   };
 
+  // Search Employee Details
+  const filteredEmployees = employees.filter((e) =>
+    e.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div
       style={{
-        padding: "40px",
+        padding: "130px",
         fontFamily: "sans-serif",
         background: "#222",
-        minHeight: "100vh",
+        minHeight: "200vh",
         color: "white",
       }}
     >
       <h1 style={{ marginBottom: "30px" }}>
         Employee Management System (Frontend + API)
       </h1>
+
+      {/* Search Bar for searching employees details */}
+      <div style={{marginBottom: "20px"}}>
+        <input
+        placeholder="Search by name..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ width: "250px", marginRight: "10px"}}
+        />
+      </div>
 
       {/* Add Employee Form */}
       <div style={{ marginBottom: "25px" }}>
@@ -181,7 +197,7 @@ function App() {
           </tr>
         </thead>
         <tbody>
-          {employees.map((e, index) => (
+          {filteredEmployees.map((e, index) => (
             <tr key={index}>
               <td>{e.name}</td>
               <td>{e.basic}</td>
