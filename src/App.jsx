@@ -9,7 +9,7 @@ function App() {
   const [otHours, setOtHours] = useState("");
   const [otRate, setOtRate] = useState("");
   const [isEdit, setIsEdit] = useState(false);
-  const [editIndex, setEditIndex] = useState(null);
+  const [editId, setEditId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
 
   // Login state
@@ -84,13 +84,13 @@ function App() {
   };
 
   // Edit Employee Details (form prefill)
-const startEdit = (emp, index) => {
+const startEdit = (emp) => {
   setName(emp.name);
   setBasic(emp.basic);
   setOtHours(emp.otHours);
   setOtRate(emp.otRate);
   setIsEdit(true);
-  setEditIndex(index);
+  setEditId(emp._id);
 };
 
 const updateEmployee = () => {
@@ -115,7 +115,7 @@ const updateEmployee = () => {
     fullSalary,
   };
 
-  fetch(`http://localhost:5001/employees/${editIndex}`, {
+  fetch(`http://localhost:5001/employees/${editId}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(updatedEmp),
@@ -131,7 +131,7 @@ const updateEmployee = () => {
   // Cancel Edit Employee Details
   const cancelEdit = () => {
     setIsEdit(false);
-    setEditIndex(null);
+    setEditId(null);
     setName("");
     setBasic("");
     setOtHours("");
@@ -139,8 +139,8 @@ const updateEmployee = () => {
   };
 
   // Delete Employee Details
-  const deleteEmployee = (index) => {
-    fetch(`http://localhost:5001/employees/${index}`, {
+  const deleteEmployee = (id) => {
+    fetch(`http://localhost:5001/employees/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -214,6 +214,17 @@ const updateEmployee = () => {
         Logged in as <strong>{role}</strong>{" "}
         {role === "admin" ? "(full access)" : "(view only)"}
       </div>
+      <div style={{ marginBottom: "10px", fontSize: "14px"}}>
+      <button 
+  onClick={() => {
+    setRole(null);
+    setUsername("");
+    setPassword("");
+  }}
+>
+  Logout
+</button>
+      </div>
       
       {/* Search Bar */}
       <div style={{ marginBottom: "20px" }}>
@@ -277,17 +288,17 @@ const updateEmployee = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredEmployees.map((e, index) => (
-            <tr key={index}>
+          {filteredEmployees.map((e) => (
+            <tr key={e._id}>
               <td>{e.name}</td>
               <td>{e.basic}</td>
               <td>{e.otAmount}</td>
               <td>{e.fullSalary}</td>
               {role === "admin" && (
                 <td>
-                  <button onClick={() => startEdit(e, index)}>Edit</button>
+                  <button onClick={() => startEdit(e)}>Edit</button>
                   <button
-                    onClick={() => deleteEmployee(index)}
+                    onClick={() => deleteEmployee(e._id)}
                     style={{ marginLeft: "8px" }}
                   >
                     Delete
