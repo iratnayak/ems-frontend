@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const AUTH_API_BASE_URL = "https://ems-backend-zeta.vercel.app";
+const AUTH_API_BASE_URL = "https://ems-backend-zeta.vercel.app/api/auth";
 
 export const registerAPICall = (registerObj) => {
     return axios.post(AUTH_API_BASE_URL + '/register', registerObj);
