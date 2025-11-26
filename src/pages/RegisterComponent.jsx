@@ -44,15 +44,11 @@ const RegisterComponent = () => {
         <Card className="w-[400px] shadow-xl border-slate-200">
             <CardHeader className="space-y-1">
                 <CardTitle className="text-2xl text-center font-bold">Create Account</CardTitle>
-                <CardDescription className="text-center">
-                    Enter your details to create a new account
-                </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">
                 
                 {/* Username */}
                 <div className="grid gap-2">
-                    <Label htmlFor="username">Username</Label>
                     <Input 
                         id="username" 
                         placeholder="Enter username" 
@@ -63,7 +59,6 @@ const RegisterComponent = () => {
 
                 {/* Password */}
                 <div className="grid gap-2">
-                    <Label htmlFor="password">Password</Label>
                     <Input 
                         id="password" 
                         type="password"
@@ -75,7 +70,7 @@ const RegisterComponent = () => {
 
                 {/* Role Selection (Styled Native Select) */}
                 <div className="grid gap-2">
-                    <Label htmlFor="role">Role</Label>
+                    <Label htmlFor="role">Select Role</Label>
                     <select 
                         id="role"
                         className="flex h-10 w-full items-center justify-between rounded-md border border-slate-200 bg-white px-3 py-2 text-sm placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50"
@@ -89,7 +84,7 @@ const RegisterComponent = () => {
 
             </CardContent>
             <CardFooter className="flex flex-col gap-2">
-                <Button className="w-full" onClick={handleRegistrationForm}>Register</Button>
+                <Button className="w-full bg-blue-200" onClick={handleRegistrationForm}>Register</Button>
                 <div className="text-center text-sm">
                     Already have an account?{" "}
                     <span 
